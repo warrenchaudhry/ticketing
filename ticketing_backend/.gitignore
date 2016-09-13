@@ -5,20 +5,20 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-ticketing_backend/.bundle
+/ticketing_backend/.bundle
 
 # Ignore the default SQLite database.
-ticketing_backend/db/*.sqlite3
-ticketing_backend/db/*.sqlite3-journal
+/ticketing_backend/db/*.sqlite3
+/ticketing_backend/db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
-ticketing_backend/log/*
-ticketing_backend/tmp/*
+/ticketing_backend/log/*
+/ticketing_backend/tmp/*
 !/log/.keep
 !/tmp/.keep
 
 # Ignore Byebug command history file.
-ticketing_backend/.byebug_history
+/ticketing_backend/.byebug_history
 
 
 *keep
