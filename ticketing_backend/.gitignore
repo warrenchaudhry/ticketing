@@ -25,3 +25,11 @@ rerun.txt
 /vendor/assets/bower_components
 *.bowerrc
 bower.json
+
+# Ignore all logfiles and tempfiles.
+/log/*
+*/log/*
+!/log/.keep
+/tmp
+.env
+*keep
