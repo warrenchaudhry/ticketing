@@ -12,10 +12,10 @@ end
 
 agent = User.find_by_email('agent1@email.com')
 unless agent
-  agent = User.create!(email: 'agent1@email.com', first_name: 'First', last_name: 'Customer', password: 'password2016', role: 'agent')
+  agent = User.create!(email: 'agent1@email.com', first_name: 'First', last_name: 'Agent', password: 'password2016', role: 'agent')
 end
 
 admin = User.find_by_email('admin1@email.com')
-unless agent
-  agent = User.create!(email: 'admin1@email.com', first_name: 'First', last_name: 'Customer', password: 'password2016', role: 'admin')
+unless admin
+  admin = User.create!(email: 'admin1@email.com', first_name: 'First', last_name: 'Admin', password: 'password2016', role: 'admin')
 end

@@ -187,6 +187,7 @@ DEPENDENCIES
   dotenv-rails
   factory_girl_rails
   faker
+  jsonapi
   listen (~> 3.0.5)
   mysql2 (~> 0.4.4)
   pg (= 0.18.4)

@@ -7,7 +7,7 @@ module Api
 
       before_action :set_user, only: [:show, :update, :destroy]
       before_action :authenticate_with_token!, except: [:create]
-      before_action :is_authorized?, except: [:me, :create, :index]
+      before_action :is_authorized?, only: [:update, :destroy]
 
       def index
         if current_user.admin?
@@ -33,13 +33,13 @@ module Api
           render json: {user: {email: user.email, password: user.password}}, status: 201
         else
           puts user.errors.messages
-          render json: {reason: {error: user.errors.messages}}, status: 419
+          resp_error(user, 422)
         end
       end
 
       private
         def user_params
-          res = ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:first_name, :last_name, :email, :phone, :password, :password_confirmation, :role])
+          ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:first_name, :last_name, :email, :phone, :password, :password_confirmation, :role])
         end
 
         def set_user
@@ -47,7 +47,7 @@ module Api
         end
 
         def is_authorized?
-          head :unauthorized unless current_user.admin? || current_user.agent? || (current_user == @user )
+          head :unauthorized unless current_user.admin?
         end
 
     end

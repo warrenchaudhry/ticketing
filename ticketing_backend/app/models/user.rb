@@ -17,6 +17,7 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   validates :role, presence: true, inclusion: { in: ROLES }
+  validates :password, :password_confirmation, presence: true, on: :create
 
   def assign_role
     self.add_role(role)
@@ -42,5 +43,9 @@ class User < ApplicationRecord
 
   def agent?
     access_level == 'agent'
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 end

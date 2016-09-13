@@ -40,9 +40,11 @@ RSpec.configure do |config|
 
   config.include FactoryGirl::Syntax::Methods
 
-
-  config.after :all do
-    ActiveRecord::Base.subclasses.each(&:delete_all)
+  config.include Request::JsonHelpers, :type => :controller
+  config.include Request::HeadersHelpers, :type => :controller
+  
+  config.before(:each, type: :controller) do
+    include_default_accept_headers
   end
 
   config.around(:each) do |example|

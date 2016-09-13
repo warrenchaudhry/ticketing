@@ -9,7 +9,15 @@ module Authenticable
   end
 
   def render_unauthorized
-    render json: { errors: "Not authenticated" }, status: :unauthorized
+    render json: {
+                    errors: [
+                              {
+                                status: '401',
+                                title: 'Unauthorized',
+                                detail: 'Not authenticated'
+                              }
+                            ]
+                  }, status: 401
   end
 
   def user_signed_in?
