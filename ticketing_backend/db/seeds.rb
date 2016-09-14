@@ -19,3 +19,19 @@ admin = User.find_by_email('admin1@email.com')
 unless admin
   admin = User.create!(email: 'admin1@email.com', first_name: 'First', last_name: 'Admin', password: 'password2016', role: 'admin')
 end
+
+customers = User.customers
+agents = User.agents
+admins = User.admins
+(1..100).each do |ctr|
+  ticket = Ticket.new(
+                          title: "Ticket No. #{ctr}",
+                          description: Faker::Lorem.paragraph(2, false, 4),
+                          status: Ticket::STATUSES.sample,
+                          priority: Ticket::PRIORITIES.sample,
+                          reporter: customers.sample,
+                          assignee: agents.sample,
+                          assignor: admins.sample
+                        )
+  ticket.save!
+end

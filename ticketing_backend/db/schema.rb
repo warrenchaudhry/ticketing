@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160913025946) do
+ActiveRecord::Schema.define(version: 20160914035328) do
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -20,6 +20,24 @@ ActiveRecord::Schema.define(version: 20160913025946) do
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
     t.index ["name"], name: "index_roles_on_name", using: :btree
+  end
+
+  create_table "tickets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "title",                                 null: false
+    t.text     "description", limit: 65535,             null: false
+    t.integer  "status",                    default: 0, null: false
+    t.integer  "reporter_id",                           null: false
+    t.integer  "assigned_to"
+    t.integer  "assigned_by"
+    t.datetime "started_at"
+    t.datetime "resolved_at"
+    t.integer  "priority",                  default: 0, null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.index ["description"], name: "index_tickets_on_description", type: :fulltext
+    t.index ["reporter_id"], name: "index_tickets_on_reporter_id", using: :btree
+    t.index ["status"], name: "index_tickets_on_status", using: :btree
+    t.index ["title"], name: "index_tickets_on_title", type: :fulltext
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

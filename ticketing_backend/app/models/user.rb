@@ -18,6 +18,12 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   validates :role, presence: true, inclusion: { in: ROLES }
   validates :password, :password_confirmation, presence: true, on: :create
+  has_many :reported_tickets, class_name: 'Ticket', foreign_key: :reporter_id
+  has_many :assigned_tickets, class_name: 'Ticket', foreign_key: :assigned_to
+
+  scope :admins, -> { with_role('admin') }
+  scope :agents, -> { with_role('agent') }
+  scope :customers, -> { with_role('customer') }
 
   def assign_role
     self.add_role(role)

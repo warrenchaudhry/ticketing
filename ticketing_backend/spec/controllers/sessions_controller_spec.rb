@@ -19,10 +19,10 @@ RSpec.describe SessionsController, type: :controller do
       it "returns the user record corresponding to the given credentials" do
         user.reload
 
-        expect(json_api_response[:'auth-token']).to eq user.auth_token
+        expect(json_response[:token]).to eq user.auth_token
       end
 
-      it { should respond_with 200 }
+      it { should respond_with 201 }
     end
 
     context "when the credentials are incorrect" do
