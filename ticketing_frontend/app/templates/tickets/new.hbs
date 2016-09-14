@@ -1,0 +1,14 @@
+<h1>I'm on new</h1>
+<form {{action "addTicket" on="submit"}} class="form-horizontal">
+  <div class="form-group">
+    <label for="title">Title</label>
+    {{input id="title" name="title" value=ticketTitle class="form-control"}}
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    {{textarea id="description" name="title" value=ticketDescription class="form-control"}}
+  </div>
+  <div class="form-group">
+    <button type="submit">Create</button>
+  </div>
+</form>

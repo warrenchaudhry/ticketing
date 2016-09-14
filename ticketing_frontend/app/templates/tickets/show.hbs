@@ -1,0 +1,13 @@
+<h2>Ticket Details</h2>
+<hr>
+<h3>TICKET ID : {{model.id}} - {{capitalize model.status}}</h3>
+<h4>Priority : {{capitalize model.priority}}</h4>
+<p><b>Assignee</b> : {{model.assignee.fullName}}</p>
+<hr>
+<h5>Title: {{model.title}}</h5>
+<h5>Description:</h5>
+<blockquote>
+{{model.description}}
+</blockquote>
+<hr>
+{{#link-to 'tickets' class='btn btn-primary btn-sm'}}Go Back{{/link-to}}

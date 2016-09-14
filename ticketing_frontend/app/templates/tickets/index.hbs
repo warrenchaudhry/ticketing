@@ -1,0 +1,31 @@
+<h1>This is Tickets page</h1>
+<table class="table table-bordered table-responsive">
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>Title</td>
+      <td>Status</td>
+      <td>Priority</td>
+      <td>Reporter</td>
+      <td>{{accessLevel}}</td>
+    </tr>
+
+  </thead>
+  <tbody>
+    {{#each model as |ticket|}}
+    <tr>
+      {{!-- {{ticket-row ticket=ticket}} --}}
+      <td>{{ticket.id}}</td>
+      <td>{{ticket.title}}</td>
+      {{!-- <td>{{ticket.title}}</td> --}}
+      <td>
+        <span class="text-center">{{capitalize ticket.status}} {{role}}</span>
+      </td>
+      <td><span class="text-center">{{capitalize ticket.priority}}</span></td>
+      <td>{{ticket.assignee.fullName}}</td>
+      <td>{{#link-to 'tickets.show' ticket.id class="btn btn-sm btn-info"}}View{{/link-to}}</td>
+
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
