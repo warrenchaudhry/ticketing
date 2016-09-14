@@ -8,16 +8,26 @@ module Api
 
       def index
           fetch_tickets
-          render json: @tickets
+          render json: @tickets.order(:created_at)
       end
 
       def show
         render json: @ticket
       end
 
+      def create
+        ticket = Ticket.create(ticket_params)
+        if ticket.save
+          render json: ticket, status: 201
+        else
+          puts ticket.errors.messages
+          resp_error(ticket, 422)
+        end
+      end
+
       private
         def ticket_params
-          ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:first_name, :last_name, :email, :phone, :password, :password_confirmation, :role])
+          ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:title, :description, :status, :priority, :status, :priority, :reporter_id, :assigned_to, :assigned_by])
         end
 
         def set_ticket
@@ -30,11 +40,11 @@ module Api
 
         def fetch_tickets
           if current_user.agent?
-            @tickets = current_user.assigned_tickets
+            @tickets = current_user.assigned_tickets.includes(:reporter, :assignee, :assignor)
           elsif current_user.customer?
-            @tickets = current_user.reported_tickets
+            @tickets = current_user.reported_tickets.includes(:reporter, :assignee, :assignor)
           else
-            @tickets = Ticket.all
+            @tickets = Ticket.includes(:reporter, :assignee, :assignor)
           end
         end
 
