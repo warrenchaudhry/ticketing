@@ -12,7 +12,7 @@ RSpec.describe SessionsController, type: :controller do
 
     context "when the credentials are correct" do
       before(:each) do
-        credentials = { session: {email: user.email, password: "password2016" }}
+        credentials = { user: {email: user.email, password: "password2016" }}
         post :create, params: credentials
       end
 
@@ -28,12 +28,12 @@ RSpec.describe SessionsController, type: :controller do
     context "when the credentials are incorrect" do
 
       before(:each) do
-        credentials = { session: {email: user.email, password: "invalidpassword" }}
+        credentials = { user: {email: user.email, password: "invalidpassword" }}
         post :create, params: credentials
       end
 
       it "returns a json with an error" do
-        expect(json_response[:errors][0][:detail]).to eq "Invalid email or password"
+        expect(json_response[:errors]).to eq "Invalid email or password"
       end
 
       it { should respond_with 422 }

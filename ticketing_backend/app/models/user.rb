@@ -4,7 +4,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   ROLES = %w(customer agent admin)
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  attr_accessor :role
+  #attr_accessor :role
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -29,8 +29,12 @@ class User < ApplicationRecord
     end while self.class.exists?(auth_token: auth_token)
   end
 
-  def access_level
-    self.roles.first.name
+  def role
+    @role ||= (self.roles.any? && self.roles.first.try(:name))
+  end
+
+  def role=(role)
+    @role = role
   end
 
   def admin?

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let(:user) { FactoryGirl.build(:user) }
   let(:admin) { FactoryGirl.build(:user, :admin) }
-  let(:admin) { FactoryGirl.create(:user, :agent) }
+  let(:agent) { FactoryGirl.build(:user, :agent) }
 
   it 'responds to attributes' do
     expect(user).to respond_to(:first_name)
@@ -32,6 +32,18 @@ RSpec.describe User, type: :model do
     should_not allow_value('lkawe924', '&&&&&&&@').for(:email)
   end
   it { should validate_uniqueness_of(:auth_token) }
+
+  describe "roles" do
+    it 'should have the correct role as customer' do
+      expect(user.role).to eq 'customer'
+    end
+    it 'should have the correct role as agent' do
+      expect(agent.role).to eq 'agent'
+    end
+    it 'should have the correct role as admin' do
+      expect(admin.role).to eq 'admin'
+    end
+  end
 
   describe "#generate_authentication_token!" do
     it "generates a unique token" do
