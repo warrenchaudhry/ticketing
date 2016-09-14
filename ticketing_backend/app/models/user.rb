@@ -38,15 +38,15 @@ class User < ApplicationRecord
   end
 
   def admin?
-    access_level == 'admin'
+    role == 'admin'
   end
 
   def customer?
-    access_level == 'customer'
+    role == 'customer'
   end
 
   def agent?
-    access_level == 'agent'
+    role == 'agent'
   end
 
   def full_name
