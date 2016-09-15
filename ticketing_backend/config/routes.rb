@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  apipie
   resources :sessions, only: [:create, :destroy]
 
   namespace :api do

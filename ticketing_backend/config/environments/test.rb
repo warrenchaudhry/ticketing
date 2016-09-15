@@ -37,6 +37,12 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  config.middleware.insert_before 0, "Rack::Cors" do
+    allow do
+      origins '*'
+      resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options, :patch]
+    end
+  end
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

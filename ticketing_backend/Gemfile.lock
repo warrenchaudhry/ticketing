@@ -43,10 +43,13 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    apipie-rails (0.3.6)
+      json
     arel (7.1.1)
     bcrypt (3.1.11)
     builder (3.2.2)
     byebug (9.0.5)
+    choice (0.2.0)
     concurrent-ruby (1.0.2)
     database_cleaner (1.5.3)
     devise (4.2.0)
@@ -75,6 +78,9 @@ GEM
     json (1.8.3)
     jsonapi (0.1.1.beta2)
       json (~> 1.8)
+    kaminari (0.17.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -116,6 +122,11 @@ GEM
     rails-dom-testing (2.0.1)
       activesupport (>= 4.2.0, < 6.0)
       nokogiri (~> 1.6.0)
+    rails-erd (1.5.0)
+      activerecord (>= 3.2)
+      activesupport (>= 3.2)
+      choice (~> 0.2.0)
+      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
     railties (5.0.0.1)
@@ -148,6 +159,7 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    ruby-graphviz (1.2.2)
     shoulda (3.5.0)
       shoulda-context (~> 1.0, >= 1.0.1)
       shoulda-matchers (>= 1.4.1, < 3.0)
@@ -181,6 +193,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.2)
+  apipie-rails
   byebug
   database_cleaner
   devise
@@ -188,12 +201,14 @@ DEPENDENCIES
   factory_girl_rails
   faker
   jsonapi
+  kaminari
   listen (~> 3.0.5)
   mysql2 (~> 0.4.4)
   pg (= 0.18.4)
   puma (~> 3.0)
   rack-cors
   rails (~> 5.0.0, >= 5.0.0.1)
+  rails-erd
   rolify
   rspec-rails (~> 3.5)
   shoulda (~> 3.5)

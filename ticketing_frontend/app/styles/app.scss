@@ -1,5 +1,25 @@
 @import "bootstrap";
+@import "font-awesome";
 
 body {
   padding-top: 20px;
+}
+table {
+  thead {
+    th {
+      text-transform:uppercase;
+      text-align: center;
+    }
+  }
+}
+.td-low {
+  color: #a94442;
+}
+
+.td-medium {
+  color: #8a6d3b;
+}
+
+.td-high {
+  color: #3c763d;
 }

@@ -13,7 +13,7 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
     // console.log(this.get('session.data.authenticated.data.attributes.auth-token'));
     var token = this.get('session.data.authenticated.token');
     // var token = 'EL-oSzY6sxv4v1v5xsy2';
-    return { 'Authorization' : token };
+    return { 'Authorization' : token, 'Access-Control-Allow-Origin' : '*' };
   }).volatile(),
 
   authorizer: 'authorizer:devise',

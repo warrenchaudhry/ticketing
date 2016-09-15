@@ -7,18 +7,21 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      {{#link-to 'index' class="navbar-brand"}}Crossover Ticketing{{/link-to}}
+      {{#link-to 'index' class="navbar-brand"}}CROSS | <span class="text-muted">OVER</span> Ticketing{{/link-to}}
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
       {{#if session.isAuthenticated}}
       <ul class="nav navbar-nav navbar-left">
-        {{#link-to 'tickets' tagName="li"}}<a href="">Tickets</a>{{/link-to}}
+        <li>{{#link-to 'tickets'}}Tickets{{/link-to}}</li>
+        {{#if isAdmin}}
+        <li>{{#link-to 'users'}}Users{{/link-to}}</li>
+        {{/if}}
       </ul>
       {{/if}}
       <ul class="nav navbar-nav navbar-right">
         {{#if session.isAuthenticated}}
-          <li class="my-nav-li"><a href="#">Hi, {{sessionAccount.account.role}}</a></li>
+          <li class="my-nav-li"><a href="#">Hi, {{sessionAccount.account.firstName}}</a></li>
           <li class="my-nav-li"><a href="#" {{action 'logout'}}>Logout</a></li>
         {{else}}
           <li class="my-nav-li" id="login">{{#link-to 'login'}}Login{{/link-to}}</li>

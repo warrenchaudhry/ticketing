@@ -45,5 +45,23 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  # config.middleware.insert_before 0, "Rack::Cors", :debug => true, :logger => (-> {Rails.logger }) do
+  #   allow do
+  #     origins 'localhost:4200'
+  #
+  #     resource '*',
+  #       :headers => :any,
+  #       :methods => [:get, :post, :delete, :put, :options, :head, :patch],
+  #       :expose  => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+  #       :max_age => 0
+  #   end
+  # end
+  config.middleware.insert_before 0, "Rack::Cors", debug: true do
+    allow do
+      origins '*'
+      resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options, :patch]
+    end
+  end
+
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end

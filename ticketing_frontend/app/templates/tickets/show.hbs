@@ -1,13 +1,43 @@
-<h2>Ticket Details</h2>
-<hr>
-<h3>TICKET ID : {{model.id}} - {{capitalize model.status}}</h3>
-<h4>Priority : {{capitalize model.priority}}</h4>
-<p><b>Assignee</b> : {{model.assignee.fullName}}</p>
-<hr>
-<h5>Title: {{model.title}}</h5>
-<h5>Description:</h5>
-<blockquote>
-{{model.description}}
-</blockquote>
-<hr>
-{{#link-to 'tickets' class='btn btn-primary btn-sm'}}Go Back{{/link-to}}
+<div class="page-header">
+  <h2>Ticket Details</h2>
+</div>
+{{#if errorMessage}}
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <ul>
+    {{#each errorMessage as |err|}}
+    <li>{{err.title}}</li>
+    {{/each}}
+  </ul>
+</div>
+{{/if}}
+<div class="row-fluid" style="margin-bottom:20px;">
+  {{#if isClosed }}
+  <button {{action "updateTicketStatus" model.id 'open'}} class="btn btn-info">Re-Open</button>
+  {{/if}}
+</div>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{model.title}}</h3>
+  </div>
+  <div class="panel-body">
+    <h5>Ticket ID : {{model.id}}</h5>
+    <h5>Resolution: {{statusBadge model.status}}</h5>
+    <h5>Priority : {{capitalize model.priority}} <span class="td-{{model.priority}}">{{priorityBadge model.priority}}</span></h5>
+    <h5>Reporter : {{model.reporter.fullName}}</h5>
+    <h5>Assignee : {{model.assignee.fullName}}</h5>
+    <h5>Assigned by : {{model.assignor.fullName}}</h5>
+    <hr>
+    <h5>Description:</h5>
+    <div class="well">
+
+      {{html-safe model.description}}
+
+    </div>
+    <hr>
+    {{#unless ticketsController.isCustomer }}
+    {{#link-to 'tickets.edit' model class='btn btn-warning btn-sm'}}Edit{{/link-to}}
+    {{/unless}}
+    {{#link-to 'tickets' class='btn btn-primary btn-sm'}}Go Back{{/link-to}}
+  </div>
+</div>

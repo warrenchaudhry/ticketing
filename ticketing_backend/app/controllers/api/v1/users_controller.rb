@@ -4,17 +4,17 @@ module Api
 
       skip_before_action :authenticate_with_token!, only: [:create], raise: false
 
-
       before_action :set_user, only: [:show, :update, :destroy]
-      before_action :authenticate_with_token!, except: [:create]
-      before_action :is_authorized?, only: [:update, :destroy]
+      before_action :is_authorized?, only: [:index, :destroy]
 
       def index
-        if current_user.admin?
-          @users = User.all
-
+        @users = User.order(:first_name)
+        if params[:filter].present?
+          if params[:filter][:role].present? && ['customer', 'admin', 'agent'].include?(params[:filter][:role])
+            @users = @users.send(params[:filter][:role].pluralize).order(:first_name)
+          end
         else
-          @users = User.where('id = ?',current_user.id)
+          @users = User.where.not(id: current_user.id).order(:first_name).with_any_role(:admin, :agent)
         end
         render json: @users, show_auth_token: false
       end
@@ -37,6 +37,15 @@ module Api
         end
       end
 
+      def update
+
+      end
+
+      def destroy
+
+      end
+
+
       private
         def user_params
           ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:first_name, :last_name, :email, :phone, :password, :password_confirmation, :role])
@@ -47,7 +56,7 @@ module Api
         end
 
         def is_authorized?
-          head :unauthorized unless current_user.admin?
+          head :unauthorized if current_user.customer?
         end
 
     end

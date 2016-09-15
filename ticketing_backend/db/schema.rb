@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 20160914035328) do
     t.string   "title",                                 null: false
     t.text     "description", limit: 65535,             null: false
     t.integer  "reporter_id"
-    t.integer  "assigned_to"
-    t.integer  "assigned_by"
+    t.integer  "assignee_id"
+    t.integer  "assignor_id"
     t.datetime "started_at"
     t.datetime "resolved_at"
     t.integer  "priority",                  default: 0, null: false

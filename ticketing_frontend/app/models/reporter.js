@@ -9,5 +9,6 @@ export default DS.Model.extend({
   role: DS.attr('string'),
   fullName: Ember.computed('firstName', 'lastName', function() {
     return `${this.get('firstName')} ${this.get('lastName')}`;
-  })
+  }),
+  // reportedTickets: hasMany('ticket', { async: true })
 });

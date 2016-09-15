@@ -13,6 +13,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
   sessionAuthenticated() {
     this._loadCurrentUser().then(()=>{
+      this.controllerFor("application").set("isAdmin", true);
       this.transitionTo('/');
     }).catch(() => this.get('session').invalidate());
   },
@@ -24,8 +25,10 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
   actions: {
     logout(){
       this.get("session").invalidate();
-      alert("bye! we'll miss you :(");
-      this.transitionTo('/login');
+      return this.transitionTo('/');
+    },
+    sessionInvalidationSucceeded: function(){
+     this.transitionTo('/login');
     }
   }
 

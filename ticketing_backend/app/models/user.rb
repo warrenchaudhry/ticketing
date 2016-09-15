@@ -19,7 +19,7 @@ class User < ApplicationRecord
   validates :role, presence: true, inclusion: { in: ROLES }
   validates :password, :password_confirmation, presence: true, on: :create
   has_many :reported_tickets, class_name: 'Ticket', foreign_key: :reporter_id
-  has_many :assigned_tickets, class_name: 'Ticket', foreign_key: :assigned_to
+  has_many :assigned_tickets, class_name: 'Ticket', foreign_key: :assignee_id
 
   scope :admins, -> { with_role('admin') }
   scope :agents, -> { with_role('agent') }

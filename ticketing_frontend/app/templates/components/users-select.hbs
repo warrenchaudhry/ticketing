@@ -1,0 +1,6 @@
+{{#x-select id=id value=value rel=value class="form-control" as |xs|}}
+  {{#xs.option }}Please select{{/xs.option}}
+  {{#each users as |user|}}
+    {{#xs.option value=user.id}}{{user.fullName}}{{/xs.option}}
+  {{/each}}
+{{/x-select}}

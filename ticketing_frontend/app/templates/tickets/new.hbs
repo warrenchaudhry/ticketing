@@ -1,14 +1,65 @@
-<h1>I'm on new</h1>
-<form {{action "addTicket" on="submit"}} class="form-horizontal">
-  <div class="form-group">
-    <label for="title">Title</label>
-    {{input id="title" name="title" value=ticketTitle class="form-control"}}
+<div class="page-header">
+  <h2>Add New Ticket</h2>
+</div>
+<div class="panel panel-primary col-sm-12 col-md-8">
+
+  <div class="panel-body">
+    <div class="row-fluid">
+      <div class="col-sm-12">
+        <form {{action "addTicket" on="submit"}} class="form-horizontal">
+
+          <fieldset>
+            <div class="form-group">
+              <label for="title">Title</label>
+              {{input id="title" name="title" value=ticketTitle class="form-control"}}
+            </div>
+            {{#unless isCustomer}}
+              <div class="form-group">
+                <label for="assignee_id">Agent</label>
+                {{#x-select id="assignee_id" value=ticketAssigneeId class="form-control" as |xs|}}
+                  {{#xs.option }}Please select{{/xs.option}}
+                  {{#each usersController.allAgents as |a|}}
+                    {{#xs.option value=a.id}}{{a.fullName}}{{/xs.option}}
+                  {{/each}}
+                {{/x-select}}
+              </div>
+
+              <div class="form-group">
+                <label for="reporter_id">Customer</label>
+                {{#x-select id="reporter_id" value=ticketReporterId class="form-control" as |xs|}}
+                  {{#xs.option }}Please select{{/xs.option}}
+                  {{#each usersController.allCustomers as |a|}}
+                    {{#xs.option value=a.id}}{{a.fullName}}{{/xs.option}}
+                  {{/each}}
+                {{/x-select}}
+              </div>
+            {{/unless}}
+            <div class="form-group">
+              <label for="status">Priority</label>
+              {{#x-select id="priority" value=ticketPriority class="form-control" as |xs|}}
+                {{#xs.option }}Please select{{/xs.option}}
+                {{#each priorities as |priority|}}
+                  {{#xs.option value=priority}}{{capitalize priority}}{{/xs.option}}
+                {{/each}}
+              {{/x-select}}
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              {{textarea id="description" name="title" value=ticketDescription class="form-control"}}
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+    </div>
+
   </div>
-  <div class="form-group">
-    <label for="description">Description</label>
-    {{textarea id="description" name="title" value=ticketDescription class="form-control"}}
-  </div>
-  <div class="form-group">
-    <button type="submit">Create</button>
-  </div>
-</form>
+</div>
+<div class="clearfix"></div>
+<hr>
+
+
+{{#link-to 'tickets' class='btn btn-primary btn-sm'}}Go Back{{/link-to}}

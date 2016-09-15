@@ -1,0 +1,6 @@
+{{#x-select id="status" value=ticketStatus class="form-control" as |xs|}}
+  {{#xs.option }}Please select{{/xs.option}}
+  {{#each statuses as |status|}}
+    {{#xs.option value=status}}{{capitalize status}}{{/xs.option}}
+  {{/each}}
+{{/x-select}}

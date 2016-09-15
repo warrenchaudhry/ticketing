@@ -1,31 +1,35 @@
-<h1>This is Tickets page</h1>
+
+<div class="page-header">
+  <h2>{{pageHeader}}</h2>
+</div>
+{{#link-to 'tickets.new' class="btn btn-primary btn-sm"}}Add New Ticket{{/link-to}}
+<hr>
+<div class="row-fluid">
 <table class="table table-bordered table-responsive">
   <thead>
     <tr>
-      <td>ID</td>
-      <td>Title</td>
-      <td>Status</td>
-      <td>Priority</td>
-      <td>Reporter</td>
-      <td>{{accessLevel}}</td>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th>Reporter</th>
+      <th>Actions</th>
     </tr>
 
   </thead>
   <tbody>
     {{#each model as |ticket|}}
     <tr>
-      {{!-- {{ticket-row ticket=ticket}} --}}
       <td>{{ticket.id}}</td>
       <td>{{ticket.title}}</td>
-      {{!-- <td>{{ticket.title}}</td> --}}
-      <td>
-        <span class="text-center">{{capitalize ticket.status}} {{role}}</span>
-      </td>
-      <td><span class="text-center">{{capitalize ticket.priority}}</span></td>
-      <td>{{ticket.assignee.fullName}}</td>
+      <td>{{truncate ticket.description 50}}</td>
+      <td class="text-center">{{statusBadge ticket.status}}</td>
+      <td class="text-center"><span class="td-{{ticket.priority}}" title="{{capitalize ticket.priority}}">{{priorityBadge ticket.priority}}</span></td>
+      <td>{{ticket.reporter.fullName}}</td>
       <td>{{#link-to 'tickets.show' ticket.id class="btn btn-sm btn-info"}}View{{/link-to}}</td>
-
     </tr>
     {{/each}}
   </tbody>
 </table>
+</div>

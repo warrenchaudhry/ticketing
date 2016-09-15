@@ -4,8 +4,8 @@ class CreateTickets < ActiveRecord::Migration[5.0]
       t.string :title, null: false
       t.text :description, null: false
       t.integer :reporter_id
-      t.integer :assigned_to, null: true
-      t.integer :assigned_by, null: true
+      t.integer :assignee_id, null: true
+      t.integer :assignor_id, null: true
       t.datetime :started_at
       t.datetime :resolved_at
       t.integer :priority, default: 0, null: false
