@@ -86,7 +86,7 @@ There should be given users:
 | Email                 | Type     |
 | -------------------   | -------  |
 | admin1@email.com      | Admin    |
-| agent@email.com       | Support  |
+| agent1@email.com       | Support  |
 | customer1@example.com | Customer |
 
 For each account password is `password2016`.
