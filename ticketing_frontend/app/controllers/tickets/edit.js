@@ -1,8 +1,6 @@
 import Ember from 'ember';
 import RequestValidations from 'ticketing-frontend/mixins/validations/ticket';
 
-const { service } = Ember.inject;
-
 export default Ember.Controller.extend(RequestValidations, {
   ticketsController: Ember.inject.controller('tickets.new'),
   usersController: Ember.inject.controller('users'),
@@ -36,7 +34,7 @@ export default Ember.Controller.extend(RequestValidations, {
             self.setProperties({title: '', description: '', status: '', priority: '', reporter_id: '', assignee_id: ''});
 
             // redirect to details page
-            self.transitionToRoute('tickets.show', ticket)
+            self.transitionToRoute('tickets.show', ticket);
           }, (reason)=> {
 
             // alert('Validation failed on server. Please try again.');

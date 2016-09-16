@@ -56,7 +56,7 @@ Rails.application.configure do
   #       :max_age => 0
   #   end
   # end
-  config.middleware.insert_before 0, "Rack::Cors", debug: true do
+  config.middleware.insert_before 0, Rack::Cors, debug: true do
     allow do
       origins '*'
       resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options, :patch]

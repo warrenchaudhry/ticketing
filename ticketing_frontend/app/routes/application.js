@@ -13,7 +13,10 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
   sessionAuthenticated() {
     this._loadCurrentUser().then(()=>{
-      this.controllerFor("application").set("isAdmin", true);
+      var role = this.get('sessionAccount').get('account.role');
+      if (role === 'admin'){
+        this.controllerFor("application").set("isAdmin", true);
+      }
       this.transitionTo('/');
     }).catch(() => this.get('session').invalidate());
   },
